@@ -171,21 +171,25 @@ function synchronizeLoaderWithImgs(elem, callback) {
 			loaderFrontMonogramContainer.style.height = ((nbImgsLoaded / nbImgsTotal) * 60) + "px";
 
 			if (nbImgsLoaded == nbImgsTotal) {
-				
-				// Reset the loader front monogram height
-				loaderFrontMonogramContainer.style.height = "0px";
 
-				// Add a padding to the current section of the header height
-				updateCurrSectionPaddingTop();
-
-				// Get on top !
-				document.body.scrollTop = 0; // For Safari
-				document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-
-				hideElem(loaderContainer);
+				// Keeps the monogram full a few milliseconds
 				setTimeout(function() {
-					displayNoneElem(loaderContainer);
-				}, 300);
+					
+					// Add a padding to the current section of the header height
+					updateCurrSectionPaddingTop();
+
+					// Get on top !
+					document.body.scrollTop = 0; // For Safari
+					document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
+					hideElem(loaderContainer);
+					setTimeout(function() {
+						displayNoneElem(loaderContainer);
+						
+						// Reset the loader front monogram height
+						loaderFrontMonogramContainer.style.height = "0px";
+					}, 300);
+				}, 400);
 			}
 		}, false);
 	});
