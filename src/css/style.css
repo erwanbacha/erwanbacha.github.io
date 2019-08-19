@@ -50,7 +50,7 @@ h1 {
 	text-align: center;
 	padding: 0 6px;
 	
-	transition: opacity 0.25s ease;
+	transition: opacity .25s ease;
 }
 
 img {
@@ -91,7 +91,7 @@ a:hover {
 	
 	background-color: white;
 	
-	transition: opacity 0.25s ease;
+	transition: opacity .25s ease;
 }
 
 .loader-dual-ring {
@@ -137,6 +137,8 @@ a:hover {
 	height: 0;
 
 	overflow: hidden;
+	
+	transition: all .3s ease;
 }
 
 .loader-dual-ring #front-monogram {
@@ -303,7 +305,7 @@ a:hover {
 
 	pointer-events: none;
 	
-	transition: all 0.25s ease;
+	transition: all .25s ease;
 }
 
 .cover img {
@@ -311,7 +313,7 @@ a:hover {
 	-moz-filter: grayscale(0%) brightness(100%);
 	filter: grayscale(0%) brightness(100%);
 
-	transition: all 0.25s ease;
+	transition: all .25s ease;
 }
 
 .cover:hover img {
