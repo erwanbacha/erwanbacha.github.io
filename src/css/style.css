@@ -298,8 +298,6 @@ a:hover {
 
 	background-color: rgba(100, 0, 0, 0);
 	
-	transform: scale(1.5) translateY(-50%);
-
 	z-index: 1;
 	opacity: 0;
 
