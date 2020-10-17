@@ -1,49 +1,39 @@
-var headerContainer;
-var loaderContainer;
-var loaderFrontMonogramContainer;
-var mainContainer;
-var sectionContainer;
-
-var indexSection;
-var detailsSection;
-var contactSection;
-
-var validHashes;
-
-var currHash;
-
 const INDEX_HASH = "Index";
 const DETAILS_HASH = "Details";
 const CONTACT_HASH = "Contact";
+
+let global = {};
 
 document.addEventListener("DOMContentLoaded", initialize, false);
 window.addEventListener("popstate", refreshLocation, false);
 window.addEventListener("resize", refreshPaddingTop, false);
 
 function initialize() {
-	indexSection = document.getElementById(INDEX_HASH);
-	detailsSection = document.getElementById(DETAILS_HASH);
-	contactSection = document.getElementById(CONTACT_HASH);
+	global.indexSection = document.getElementById(INDEX_HASH);
+	global.detailsSection = document.getElementById(DETAILS_HASH);
+	global.contactSection = document.getElementById(CONTACT_HASH);
 	
-	headerContainer = document.getElementById("header-container");
-	mainContainer = document.getElementById("main-container");
-	sectionContainer = document.getElementById("section-container");
-	loaderContainer = document.getElementById("loader-container");
-	loaderFrontMonogramContainer = document.getElementById("loader-front-monogram-container");
+	global.main = document.getElementById("main");
+	global.headerContainer = document.getElementById("header-container");
+	global.sectionContainer = document.getElementById("section-container");
+	global.loaderContainer = document.getElementById("loader-container");
+	global.loaderFrontMonogramContainer = document.getElementById("loader-front-monogram-container");
 
 	// Retrieve the valid hashes
 
-	validHashes = [INDEX_HASH, CONTACT_HASH];
+	global.validHashes = [INDEX_HASH, CONTACT_HASH];
 	data.projects.covers.forEach(function(cover) {
-		validHashes.push(cover.hash);
+		global.validHashes.push(cover.hash);
 	});
-	
-	// Update the location
+
+	removeHoverIfHasTouch();
 	
 	refreshLocation();
 }
 
-// Location
+/*----------------------*/
+/*		Location		*/
+/*----------------------*/
 
 function getLocationHash() {
 	let anchorIdx = window.location.hash.indexOf('.');
@@ -61,126 +51,88 @@ function getLocationAnchor() {
 }
 
 function refreshLocation() {
-
-	// Read the curent window hash
 	let currHash = getLocationHash();
 	let currAnchor = getLocationAnchor();
 
-	// If the hash is not valid, we set index as the default one
-	if (validHashes.indexOf(currHash) < 0) {
+	if (global.validHashes.indexOf(currHash) < 0) {
 		currHash = INDEX_HASH;
 	}
+	
+	global.main.setAttribute("data-location", currHash);
+	global.sectionContainer.innerHTML = '';
 
-	// Update the current location accordingly
-	mainContainer.setAttribute("data-location", currHash);
-	sectionContainer.innerHTML = '';
-
-	// Index
 	if (currHash == INDEX_HASH) {
 
-		// Create the index section from the covers and add it to the section container
-		var indexSection = createIndexSection(data.projects.covers);
-		sectionContainer.appendChild(indexSection);
+		const indexSection = createIndexSection(data.projects.covers);
+		global.sectionContainer.appendChild(indexSection);
 
-		// Synchronize the loader with the imgs of the section
-		synchronizeLoaderWithImgs(sectionContainer);
+		handleContentLoading(global.sectionContainer);
 	}
-	// Contact
 	else if (currHash == CONTACT_HASH) {
 
-		// Create the contact section and add it to the section container
-		var contactSection = createContactSection(data.contact);
-		sectionContainer.appendChild(contactSection);
-		
-		// Hide the loader
-		displayNoneElem(loaderContainer);
-		hideElem(loaderContainer);
-	}
-	// Details
-	else {
-		// Create the details section
+		const contactSection = createContactSection(data.contact);
+		global.sectionContainer.appendChild(contactSection);
 
-		
-		var projectsHashes = data.projects.covers.map((cover) => {
+		preventContentLoading();
+	}
+	else {
+		const orderedProjectHashes = data.projects.covers.map((cover) => {
 			return cover.hash;
 		});
-		var currProjectIndex = projectsHashes.indexOf(currHash);
+		var currProjectIndex = orderedProjectHashes.indexOf(currHash);
 
-		var nbProjects = projectsHashes.length;
-		var prevProjectHash = projectsHashes[((currProjectIndex - 1) % nbProjects + nbProjects) % nbProjects];
-		var nextProjectHash = projectsHashes[((currProjectIndex + 1) % nbProjects + nbProjects) % nbProjects];
+		const nbProjects = orderedProjectHashes.length;
+		var prevProjectHash = orderedProjectHashes[((currProjectIndex - 1) % nbProjects + nbProjects) % nbProjects];
+		var nextProjectHash = orderedProjectHashes[((currProjectIndex + 1) % nbProjects + nbProjects) % nbProjects];
 
-		var detailsSection = createDetailsSection(
+		const detailsSection = createDetailsSection(
 			{ ...data.projects.contents[currHash], hash: currHash },
 			{ ...data.projects.contents[prevProjectHash], hash: prevProjectHash },
 			{ ...data.projects.contents[nextProjectHash], hash: nextProjectHash }
 		);
 
-		// Add it to the section container
-		sectionContainer.appendChild(detailsSection);
+		global.sectionContainer.appendChild(detailsSection);
 
-		// Synchronize the loader with the imgs of the section
-		synchronizeLoaderWithImgs(sectionContainer, currAnchor);
+		handleContentLoading(global.sectionContainer, currAnchor);
 	}
 }
 
 function refreshPaddingTop() {
-	sectionContainer.style.paddingTop = headerContainer.offsetHeight + "px";
+	global.sectionContainer.style.paddingTop = global.headerContainer.offsetHeight + "px";
 }
 
-// CSS animations
+/*------------------*/
+/*		Loader		*/
+/*------------------*/
 
-function hasTouch() {
-    return "ontouchstart" in document.documentElement
-           || navigator.maxTouchPoints > 0
-           || navigator.msMaxTouchPoints > 0;
-}
-
-// Remove all :hover stylesheets
-
-if (hasTouch()) {
-    try {
-        for (var si in document.styleSheets) {
-            var styleSheet = document.styleSheets[si];
-            if (!styleSheet.rules) continue;
-
-            for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
-                if (!styleSheet.rules[ri].selectorText) continue;
-
-                if (styleSheet.rules[ri].selectorText.match(":hover")) {
-                    styleSheet.deleteRule(ri);
-                }
-            }
-        }
-    } catch (ex) {}
-}
-
-function synchronizeLoaderWithImgs(dom, anchor) {
-	var imgs = dom.querySelectorAll("img");
+function handleContentLoading(elements, anchor) {
+	var imgs = elements.querySelectorAll("img");
 	
 	// Show the loader
-	displayElem(loaderContainer);
-	showElem(loaderContainer);
+	displayElement(global.loaderContainer);
+	showElement(global.loaderContainer);
 
 	let nbImgsLoaded = 0;
 	let nbImgsTotal = 0;
 
 	imgs.forEach(function(img) {
-		hideElem(img);
+
+		hideElement(img);
 		nbImgsTotal++;
+
 		img.addEventListener("load", function() {
-			showElem(img);
+
+			showElement(img);
 			nbImgsLoaded++;
 
-			// Update the front loader front monogram height
-			loaderFrontMonogramContainer.style.height = ((nbImgsLoaded / nbImgsTotal) * 60) + "px";
+			// Update the loader state
+			global.loaderFrontMonogramContainer.style.height = ((nbImgsLoaded / nbImgsTotal) * 60) + "px";
 
 			if (nbImgsLoaded == nbImgsTotal) {
 
 				// Keeps the monogram full a few milliseconds
 				setTimeout(function() {
 					
-					// Add a padding to the current section of the header height
 					refreshPaddingTop();
 					
 					let anchorElem;
@@ -191,50 +143,60 @@ function synchronizeLoaderWithImgs(dom, anchor) {
 						}
 					}
 
-					let scrollTop = (anchorElem) ? anchorElem.offsetTop - headerContainer.offsetHeight : 0;
+					let scrollTop = (anchorElem) ? anchorElem.offsetTop - global.headerContainer.offsetHeight : 0;
 
 					// Get on top !
-					document.body.scrollTop = scrollTop; // For Safari
-					document.documentElement.scrollTop = scrollTop; // For Chrome, Firefox, IE and Opera
+					document.body.scrollTop = scrollTop;
+					document.documentElement.scrollTop = scrollTop;
 
-					hideElem(loaderContainer);
+					hideElement(global.loaderContainer);
 					setTimeout(function() {
-						displayNoneElem(loaderContainer);
+						// Hide the loader
+						displayNoneElement(global.loaderContainer);
 						
-						// Reset the loader front monogram height
-						loaderFrontMonogramContainer.style.height = "0px";
+						// Reset the loader state
+						global.loaderFrontMonogramContainer.style.height = "0px";
 					}, 300);
-				}, 400);
+				}, 200);
 			}
 		}, false);
 	});
 }
 
-function hideElem(el) {
-	if (!el.classList.contains("opacity-0")) {
-		el.classList.add("opacity-0");
+function preventContentLoading() {
+	displayNoneElement(global.loaderContainer);
+	hideElement(global.loaderContainer);
+}
+
+// Elements' style related functions
+
+function hideElement(element) {
+	if (!element.classList.contains("opacity-0")) {
+		element.classList.add("opacity-0");
 	}
 }
 
-function showElem(el) {
-	if (el.classList.contains("opacity-0")) {
-		el.classList.remove("opacity-0");
+function showElement(element) {
+	if (element.classList.contains("opacity-0")) {
+		element.classList.remove("opacity-0");
 	}
 }
 
-function displayNoneElem(el) {
-	if (!el.classList.contains("display-none")) {
-		el.classList.add("display-none");
+function displayNoneElement(element) {
+	if (!element.classList.contains("display-none")) {
+		element.classList.add("display-none");
 	}
 }
 
-function displayElem(el) {
-	if (el.classList.contains("display-none")) {
-		el.classList.remove("display-none");
+function displayElement(element) {
+	if (element.classList.contains("display-none")) {
+		element.classList.remove("display-none");
 	}
 }
 
-// DOM Creation
+/*--------------------------*/
+/*		DOM generation		*/
+/*--------------------------*/
 
 function createIndexSection(covers) {
 	var indexSection = document.createElement("section");
@@ -281,7 +243,7 @@ function createCoverCols(cover) {
 	link.classList.add("cover-link");
 	link.href = "#" + cover.hash + ((cover.anchor) ? "." + cover.anchor : "");
 
-	title.textContent = cover.hash.replace(/[^a-z0-9]/gi, " ").toUpperCase();
+	title.textContent = cover.hash.replace(/[^a-z0-9]/gi, " ");
 
 	img.src = "media/img/" + cover.hash + "/" + cover.img;
 	img.classList.add("cover-img");
@@ -481,4 +443,32 @@ function parseHTMLFromText(text, hash) {
 	});
 	
 	return htmlList;
+}
+
+/*------------------*/
+/*		Utility		*/
+/*------------------*/
+
+function removeHoverIfHasTouch() {
+	var hasTouch = function() {
+		return "ontouchstart" in document.documentElement
+			|| navigator.maxTouchPoints > 0
+			|| navigator.msMaxTouchPoints > 0;
+	};
+	if (hasTouch()) {
+		try {
+			for (var si in document.styleSheets) {
+				var styleSheet = document.styleSheets[si];
+				if (!styleSheet.rules) continue;
+
+				for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
+					if (!styleSheet.rules[ri].selectorText) continue;
+
+					if (styleSheet.rules[ri].selectorText.match(":hover")) {
+						styleSheet.deleteRule(ri);
+					}
+				}
+			}
+		} catch (ex) {}
+	}
 }

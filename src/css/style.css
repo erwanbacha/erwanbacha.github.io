@@ -32,7 +32,6 @@
 body {
 	font-size: 18px;
 	font-family: "Poppins";
-	overflow-x: hidden;
 	color: rgb(150, 150, 150);
 }
 
@@ -47,22 +46,11 @@ h1 {
 	margin-bottom: 10px;
 }
 
-#main-container:not([data-location='Index']) section {
-	width: 100%;
-	max-width: 1125px;
-	margin: auto;
-	text-align: center;
-	padding: 0 6px;
-	
-	transition: opacity .25s ease;
-}
-
 img {
 	width: 100%;
 }
 
 nav a {
-	position: relative;
 	display: inline-block;
 	text-decoration: none;
 }
@@ -197,8 +185,6 @@ a {
 #header {
 	position: relative;
 
-	max-width: 1125px;
-
 	padding: 6px 8px 2px 8px;
 
 	color: rgb(0, 0, 0);
@@ -226,12 +212,13 @@ a {
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+
+	text-transform: uppercase;
 }
 
 /* Small screens */
 
 @media screen and (max-width: 600px) {
-	
 	#signature-container,
 	#nav-container {
 		text-align: center !important;
@@ -241,7 +228,6 @@ a {
 /* Medium screens */
 
 @media screen and (max-width: 1200px) {
-
 	.no-md {
 		display: none !important;
 	}
@@ -250,17 +236,16 @@ a {
 /* Large screens */
 
 @media screen and (min-width: 1201px) {
-
-	#main-container[data-location='Index'] #header {
+	#main #header {
 		padding: 0;
 		max-width: 100%;
 	}
 
-	#main-container[data-location='Index'] #signature-container {
+	#main #signature-container {
 		text-align: right;
 	}
 
-	#main-container[data-location='Index'] #nav-container {
+	#main #nav-container {
 		text-align: left;
 	}
 }
@@ -289,6 +274,7 @@ a {
 	top: 50%;
 
 	font-family: "Druk";
+	text-transform: uppercase;
 	
 	font-size: 2em;
 	font-weight: bold;
@@ -404,9 +390,9 @@ a {
 /*------------------*/
 
 
-section#Contact {
+.contact {
+	text-align: center;
 	padding-top: 30vh !important;
-	vertical-align: middle;
 }
 
 /*------------------*/
@@ -417,6 +403,9 @@ section#Contact {
 .details {
 	width: 100%;
 	max-width: 1200px;
+
+	padding: 0 6px;
+
 	margin: auto;
 	text-align: left;
 }
