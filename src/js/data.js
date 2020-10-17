@@ -18,10 +18,6 @@ const projects = {
 			hash : "Mum",
 			img: "cover1.jpg"
 		},
-		/*{
-			hash : "PDG",
-			img: "cover1.jpg"
-		},*/
 		{
 			hash : "Still_life",
 			img: "cover1.jpg"
@@ -32,11 +28,6 @@ const projects = {
 			large_img_order: "right",
 			img: "cover1bis.jpg",
 		},
-		/*{
-			hash : "Autodafe",
-			anchor: "lol",
-			img: "cover1.jpg"
-		},*/
 		{
 			hash : "Eve",
 			large_img: "cover1.jpg",
@@ -52,14 +43,6 @@ const projects = {
 			hash : "Rodeo",
 			img: "cover1.jpg"
 		},
-		/*{
-			hash : "Lady_Snowblood",
-			img: "cover1.jpg"
-		},*/
-		/*{
-			hash : "Terrain_magazine",
-			img: "cover1.jpg"
-		},*/
 		{
 			hash : "Hermes",
 			img: "cover1.jpg"
@@ -74,10 +57,6 @@ const projects = {
 			hash : "Personal_Work",
 			img: "cover1.jpg"
 		},
-		/*{
-			hash : "Carcasses",
-			img: "cover1.jpg"
-		},*/
 		{
 			hash : "SkinAtlas",
 			img: "cover1.jpg"
@@ -92,7 +71,28 @@ const projects = {
 			hash : "Ibis",
 			img: "cover3.jpg",
 			anchor: "3"
-		}
+		},
+		{
+			hash : "Terrain_magazine",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "PDG",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "Autodafe",
+			anchor: "lol",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "Carcasses",
+			img: "cover1.jpg"
+		},
+		/*{
+			hash : "Lady_Snowblood",
+			img: "cover1.jpg"
+		},*/
 	],
 	contents : {
 		Autodafe : {
