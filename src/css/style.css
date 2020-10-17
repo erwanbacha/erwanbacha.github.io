@@ -277,6 +277,8 @@ a {
 	text-align: center;
 	
 	overflow: hidden;
+
+	background-color: rgb(32, 32, 32);
 }
 
 .cover span {
@@ -293,8 +295,6 @@ a {
 	
 	color: white;
 	text-shadow: black 0.1em 0.1em 0.2em;
-
-	background-color: rgba(100, 0, 0, 0);
 	
 	z-index: 1;
 	opacity: 0;
@@ -304,18 +304,18 @@ a {
 	transition: all .25s ease;
 }
 
-.cover img {
-	-webkit-filter: grayscale(0%) brightness(100%);
-	-moz-filter: grayscale(0%) brightness(100%);
-	filter: grayscale(0%) brightness(100%);
+.cover a {
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+}
 
-	transition: all .25s ease;
+.cover img {
+	visibility: visible;
 }
 
 .cover:hover img {
-	-webkit-filter: brightness(0%);
-	-moz-filter: brightness(0%);
-	filter: brightness(0%);
+	visibility: hidden;
 }
 
 .cover:hover span {
