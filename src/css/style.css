@@ -6,17 +6,17 @@
 
 @font-face {	
 	font-family: "Oswald";
-	src: url("../font/Oswald-Light.ttf") format("truetype");
+	src: url("../../media/font/Oswald-Light.ttf") format("truetype");
 }
 
 @font-face {	
 	font-family: "Druk";
-	src: url("../font/Druk-XCondSuperItalic.ttf") format("truetype");
+	src: url("../../media/font/DrukTextWide-Medium.otf") format("opentype");
 }
 
 @font-face {	
 	font-family: "Poppins";
-	src: url("../font/Poppins-Regular.ttf") format("truetype");
+	src: url("../../media/font/Poppins-Regular.ttf") format("truetype");
 }
 
 /*------------------*/
@@ -38,9 +38,8 @@ body {
 
 h1 {
 	font-family: "Druk";
-	letter-spacing: 5px;
 	
-	font-size: 3em;
+	font-size: 2em;
 	font-weight: normal;
 	
 	padding-top: 20px;
@@ -70,10 +69,6 @@ nav a {
 
 a {
 	color: inherit;
-}
-
-a:hover {
-	font-weight: bold;
 }
 
 /*------------------*/
@@ -205,6 +200,9 @@ a:hover {
 	max-width: 1125px;
 
 	padding: 6px 8px 2px 8px;
+
+	color: rgb(0, 0, 0);
+	font-family: "Druk";
 	
 	margin: auto;
 }
@@ -218,10 +216,6 @@ a:hover {
 	max-width: 90%;
 
 	vertical-align: middle;
-}
-
-#signature:hover {
-	opacity: 0.5;
 }
 
 #nav-container {
@@ -293,9 +287,8 @@ a:hover {
 	top: 50%;
 
 	font-family: "Druk";
-	letter-spacing: 6px;
 	
-	font-size: 3em;
+	font-size: 2em;
 	font-weight: bold;
 	
 	color: white;
@@ -320,9 +313,9 @@ a:hover {
 }
 
 .cover:hover img {
-	-webkit-filter: grayscale(100%) brightness(50%);
-	-moz-filter: grayscale(100%) brightness(50%);
-	filter: grayscale(100%) brightness(50%);
+	-webkit-filter: grayscale(100%) brightness(15%);
+	-moz-filter: grayscale(100%) brightness(15%);
+	filter: grayscale(100%) brightness(15%);
 }
 
 .cover:hover span {
@@ -441,17 +434,34 @@ section#Contact {
 
 .details p > a {
 	font-weight: bold;
+	white-space: nowrap;
 }
 
 .details img,
 .details video {
 	display: inline-block;
-	vertical-align: bottom;
+	vertical-align: middle;
 
 	padding-left: 3px;
 	padding-right: 3px;
 	padding-bottom: 6px;
 }
+
+.details img[data-align='mid'],
+.details video[data-align='mid'] {
+	vertical-align: middle !important;
+}
+
+.details img[data-align='bot'],
+.details video[data-align='bot'] {
+	vertical-align: bottom !important;
+}
+
+.details img[data-align='top'],
+.details video[data-align='top'] {
+	vertical-align: top !important;
+}
+
 
 .details a:only-child img,
 .details video:only-child {

@@ -34,7 +34,7 @@ function initialize() {
 	// Retrieve the valid hashes
 
 	validHashes = [INDEX_HASH, CONTACT_HASH];
-	projects.covers.forEach(function(cover) {
+	data.projects.covers.forEach(function(cover) {
 		validHashes.push(cover.hash);
 	});
 	
@@ -79,7 +79,7 @@ function refreshLocation() {
 	if (currHash == INDEX_HASH) {
 
 		// Create the index section from the covers and add it to the section container
-		var indexSection = createIndexSection(projects.covers);
+		var indexSection = createIndexSection(data.projects.covers);
 		sectionContainer.appendChild(indexSection);
 
 		// Synchronize the loader with the imgs of the section
@@ -89,7 +89,7 @@ function refreshLocation() {
 	else if (currHash == CONTACT_HASH) {
 
 		// Create the contact section and add it to the section container
-		var contactSection = createContactSection(contact);
+		var contactSection = createContactSection(data.contact);
 		sectionContainer.appendChild(contactSection);
 		
 		// Hide the loader
@@ -101,7 +101,7 @@ function refreshLocation() {
 		// Create the details section
 
 		
-		var projectsHashes = projects.covers.map((cover) => {
+		var projectsHashes = data.projects.covers.map((cover) => {
 			return cover.hash;
 		});
 		var currProjectIndex = projectsHashes.indexOf(currHash);
@@ -111,9 +111,9 @@ function refreshLocation() {
 		var nextProjectHash = projectsHashes[((currProjectIndex + 1) % nbProjects + nbProjects) % nbProjects];
 
 		var detailsSection = createDetailsSection(
-			{ ...projects.contents[currHash], hash: currHash },
-			{ ...projects.contents[prevProjectHash], hash: prevProjectHash },
-			{ ...projects.contents[nextProjectHash], hash: nextProjectHash }
+			{ ...data.projects.contents[currHash], hash: currHash },
+			{ ...data.projects.contents[prevProjectHash], hash: prevProjectHash },
+			{ ...data.projects.contents[nextProjectHash], hash: nextProjectHash }
 		);
 
 		// Add it to the section container
@@ -283,7 +283,7 @@ function createCoverCols(cover) {
 
 	title.textContent = cover.hash.replace(/[^a-z0-9]/gi, " ").toUpperCase();
 
-	img.src = "src/img/" + cover.hash + "/" + cover.img;
+	img.src = "media/img/" + cover.hash + "/" + cover.img;
 	img.classList.add("cover-img");
 
 	div.appendChild(title);
@@ -304,7 +304,7 @@ function createCoverCols(cover) {
 		col2.setAttribute("data-type", "double");
 		col2.setAttribute("data-order", cover.large_img_order);
 
-		img2.src = "src/img/" + cover.hash + "/" + cover.large_img;
+		img2.src = "media/img/" + cover.hash + "/" + cover.large_img;
 		img2.classList.add("cover-img");
 
 		div2.appendChild(title2);
@@ -373,7 +373,7 @@ function createContactSection(contact) {
 	
 	contactDiv.classList.add("contact");
 
-	var htmlList = parseHTMLFromText(contact.text, null);
+	var htmlList = parseHTMLFromText(contact.content, null);
 	
 	htmlList.forEach(function(elem) {
 		contactDiv.appendChild(elem);
@@ -439,16 +439,20 @@ function parseHTMLFromText(text, hash) {
 
 		// Image and Video
 		
-		paragraph = paragraph.replace(/\[(.*?)\]/g, function(match, capture) {
-			if (capture.indexOf(".mp4") == capture.length - 4) {
+		paragraph = paragraph.replace(/\[(.*?)(?:,(.*?))?\]/g, function(match, src, align) {
+			if (src.indexOf(".mp4") == src.length - 4) {
 				let video = document.createElement("video");
 				let source = document.createElement("source");
 
-				source.src = "src/img/" + hash + "/" + capture;
+				source.src = "media/img/" + hash + "/" + src;
 				source.type = "video/mp4";
 
 				video.controls = true;
 				video.appendChild(source);
+
+				if (align) {
+					video.setAttribute('data-align', align);
+				}
 				
 				return video.outerHTML;
 			}
@@ -456,9 +460,13 @@ function parseHTMLFromText(text, hash) {
 				let img = document.createElement("img");
 				let a = document.createElement("a");
 
-				img.src = "src/img/" + hash + "/" + capture;
+				img.src = "media/img/" + hash + "/" + src;
 
-				a.href = "src/img/" + hash + "/" + capture;
+				if (align) {
+					img.setAttribute('data-align', align);
+				}
+
+				a.href = "media/img/" + hash + "/" + src;
 				a.target = "_blank";
 				
 				a.appendChild(img);
