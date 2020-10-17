@@ -1,9 +1,101 @@
 const projects = {
-	order : ["Stigmates", "PDG", "Autodafe", "Eve", "Moelle", "Still_life", "Lady_Snowblood", "Skies", "SkinAtlas", "Terrain_magazine", "Cadences", "Carcasses"],
-	list : {
-
-		Autodafe : {
+	covers: [
+		{
+			hash : "Ibis",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "Mercure",
+			large_img: "cover1.jpg",
+			large_img_order: "left",
+			img: "cover1bis.jpg"
+		},
+		{
+			hash : "Moelle",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "Mum",
+			img: "cover1.jpg"
+		},
+		/*{
+			hash : "PDG",
+			img: "cover1.jpg"
+		},*/
+		{
+			hash : "Still_life",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "Stigmates",
+			large_img: "cover1.jpg",
+			large_img_order: "right",
+			img: "cover1bis.jpg",
+		},
+		/*{
 			hash : "Autodafe",
+			anchor: "lol",
+			img: "cover1.jpg"
+		},*/
+		{
+			hash : "Eve",
+			large_img: "cover1.jpg",
+			large_img_order: "left",
+			img: "cover1bis.jpg",
+		},
+		{
+			hash : "Ibis",
+			img: "cover2.jpg",
+			anchor: "2"
+		},
+		{
+			hash : "Rodeo",
+			img: "cover1.jpg"
+		},
+		/*{
+			hash : "Lady_Snowblood",
+			img: "cover1.jpg"
+		},*/
+		/*{
+			hash : "Terrain_magazine",
+			img: "cover1.jpg"
+		},*/
+		{
+			hash : "Hermes",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "Cadences",
+			large_img: "cover1.jpg",
+			large_img_order: "right",
+			img: "cover1bis.jpg"
+		},
+		{
+			hash : "Personnal_Work",
+			img: "cover1.jpg"
+		},
+		/*{
+			hash : "Carcasses",
+			img: "cover1.jpg"
+		},*/
+		{
+			hash : "SkinAtlas",
+			img: "cover1.jpg"
+		},
+		{
+			hash : "Skies",
+			large_img: "cover1.jpg",
+			large_img_order: "right",
+			img: "cover1bis.jpg"
+		},
+		{
+			hash : "Ibis",
+			img: "cover3.jpg",
+			anchor: "3"
+		}
+	],
+	contents : {
+		Autodafe : {
 			title : "AUTODAFE",
 			details : 
 				`The project is a short 3-minutes video clip.
@@ -15,12 +107,14 @@ const projects = {
 				I used fire to effect people as much as possible.			
 				I then mocked up the videos on screen, in order to create a simulation of how the project would look like in an exhibition.
 				This video aim to be exhibited into art galeries, projected on big wide screens.
-				
+
 				[1.jpg]
 
 				[2.mp4]
 
 				[3.jpg]
+
+				<#lol>
 
 				[4.jpg]
 
@@ -31,7 +125,6 @@ const projects = {
 				[8.jpg][9.jpg]`
 		},
 		Cadences : {
-			hash : "Cadences",
 			title : "CADENCES",
 			details : 
 				`Creation of a short 30 seconds video clip made up with photographs about dance and movements.
@@ -55,10 +148,9 @@ const projects = {
 
 				[8.jpg][9.jpg]
 				
-				[10.jpg]`
+				[cover1.jpg]`
 		},
 		Carcasses : {
-			hash : "Carcasses",
 			title : "CARCASSES",
 			details : 
 				`Editorial project based on the graphic forms found in car wrecks.
@@ -89,7 +181,6 @@ const projects = {
 				[11.gif]`			
 		},
 		Eve : {
-			hash : "Eve",
 			title : "EVE",
 			details : 
 				`Creation of 80 page book, consisting in 90 photographs of 12 naked women, in order to highlight body diversity and the beauty we find in it.
@@ -107,8 +198,43 @@ const projects = {
 				
 				[9.jpg]`
 		},
+		Hermes : {
+			title : "HERMES",
+			details : 
+				`[1.jpg]
+
+				[2.jpg]
+
+				[3.jpg]
+
+				[4.jpg]`
+		},
+		Ibis : {
+			title : "IBIS",
+			details : 
+				`[1.jpg][2.jpg][3.jpg]
+
+				[4.jpg]
+
+				[5.jpg][6.jpg][7.jpg]
+				
+				[8.jpg]
+
+				[9.jpg]
+
+				<#2>
+				
+				[10.jpg][11.jpg][12.jpg]
+
+				[13.jpg]
+
+				<#3>
+				
+				[14.jpg]
+				
+				[15.jpg]`
+		},
 		Lady_Snowblood : {
-			hash : "Lady_Snowblood",
 			title : "LADY SNOWBLOOD",
 			details : 
 				`Series of photographs consisting in 4 scenes portraying a killing geisha.
@@ -122,8 +248,26 @@ const projects = {
 
 				[5.jpg]`
 		},
+		Mercure : {
+			title : "MERCURE",
+			details : 
+				`[1.jpg]
+				
+				[2.jpg]
+				
+				[3.jpg]
+
+				[4.jpg]
+				
+				[5.jpg]
+
+				[6.jpg]
+				
+				[7.jpg]
+
+				[8.jpg]`
+		},
 		Moelle : {
-			hash : "Moelle",
 			title : "MOELLE",
 			details : 
 				`A premium Magazine issue created in collaboration with Alicia Andre. In a nutshell, the magazine is about food and culinary ehaviours in six different religions and cults that can be found in Paris.
@@ -144,8 +288,22 @@ const projects = {
 
 				[6.jpg]`
 		},
+		Mum : {
+			title : "MUM",
+			details : 
+				`[1.jpg]
+				
+				[2.jpg]
+				
+				[3.jpg]
+
+				[4.jpg][5.jpg]
+				
+				[6.jpg]
+
+				[7.jpg]`
+		},
 		PDG : {
-			hash : "PDG",
 			title : "PRETTY DAMN GOOD",
 			details : 
 				`Rebranding of a parisian burger restaurant.
@@ -169,8 +327,41 @@ const projects = {
 
 				[8.jpg]`
 		},
+		Personal_Work : {
+			title : "PERSONAL WORK",
+			details : 
+				`[1.jpg]
+				
+				[2.jpg]
+				
+				[3.jpg]
+				
+				[4.jpg]
+				
+				[5.jpg]
+				
+				[6.jpg]
+
+				[7.jpg]
+
+				[8.jpg]`
+		},
+		Rodeo : {
+			title : "RODEO",
+			details : 
+				`[1.jpg]
+				
+				[2.jpg][3.jpg]
+				
+				[4.jpg]
+				
+				[5.jpg][6.jpg]
+
+				[7.jpg]
+
+				[8.jpg][9.jpg][10.jpg]`
+		},
 		Skies : {
-			hash : "Skies",
 			title : "SKIES",
 			details : 
 				`Series of black and white photographs portraying the aviation world.
@@ -197,7 +388,6 @@ const projects = {
 				[9.jpg]`
 		},
 		SkinAtlas : {
-			hash: "SkinAtlas",
 			title : "SKIN ATLAS",
 			details :
 				`Visual experimentation and creation of a map from my own skin.
@@ -225,7 +415,6 @@ const projects = {
 				[10.mp4]`
 		},
 		Stigmates : {
-			hash : "Stigmates",
 			title : "STIGMATES",
 			details : 
 				`A group project (Alicia Andre, Inès Ferhat, Miguel Soudjay) based on the theme of internet challenges.
@@ -248,14 +437,13 @@ const projects = {
 
 				[9.jpg]
 				
-				[10.jpg][11.jpg]
+				[cover1.jpg][11.jpg]
 
 				[12.jpg][13.jpg]
 
 				[14.jpg][15.jpg]`
 		},
 		Still_life : {
-			hash : "Still_life",
 			title : "STILL LIFE",
 			details : 
 				`A series of animated compositions based on the theme of sport.
@@ -273,7 +461,6 @@ const projects = {
 				[7.jpg][8.gif]`
 		},
 		Terrain_magazine : {
-			hash : "Terrain_magazine",
 			title : "TERRAIN MAGAZINE",
 			details : 
 				`Illustration series based on anthropological articles (Terrain Magazine) on the theme of ghosts and spiritism around different cultures.

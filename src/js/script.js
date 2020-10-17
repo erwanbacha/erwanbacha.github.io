@@ -4,27 +4,21 @@ var loaderFrontMonogramContainer;
 var mainContainer;
 var sectionContainer;
 
-var rowsNbCols;
-var nbProjects;
-
 var indexSection;
 var detailsSection;
 var contactSection;
 
-var nbImgsTotal;
-var nbImgsLoaded
-
 var validHashes;
+
 var currHash;
-var prevHash;
 
 const INDEX_HASH = "Index";
 const DETAILS_HASH = "Details";
 const CONTACT_HASH = "Contact";
 
 document.addEventListener("DOMContentLoaded", initialize, false);
-window.addEventListener("popstate", updateLocation, false);
-window.addEventListener("resize", updateCurrSectionPaddingTop, false);
+window.addEventListener("popstate", refreshLocation, false);
+window.addEventListener("resize", refreshPaddingTop, false);
 
 function initialize() {
 	indexSection = document.getElementById(INDEX_HASH);
@@ -32,36 +26,45 @@ function initialize() {
 	contactSection = document.getElementById(CONTACT_HASH);
 	
 	headerContainer = document.getElementById("header-container");
-	loaderContainer = document.getElementById("loader-container");
-	loaderFrontMonogramContainer = document.getElementById("loader-front-monogram-container");
 	mainContainer = document.getElementById("main-container");
 	sectionContainer = document.getElementById("section-container");
+	loaderContainer = document.getElementById("loader-container");
+	loaderFrontMonogramContainer = document.getElementById("loader-front-monogram-container");
 
 	// Retrieve the valid hashes
 
 	validHashes = [INDEX_HASH, CONTACT_HASH];
-	projects.order.forEach(function(projectName) {
-		validHashes.push(projects.list[projectName].hash);
+	projects.covers.forEach(function(cover) {
+		validHashes.push(cover.hash);
 	});
-
-	currHash = INDEX_HASH;
-
-	// Set some constants
-
-	rowsNbCols = [4, 4, 4];
-	nbProjects = projects.order.length;
-
+	
 	// Update the location
-
-	updateLocation();
+	
+	refreshLocation();
 }
 
 // Location
 
-function updateLocation() {
+function getLocationHash() {
+	let anchorIdx = window.location.hash.indexOf('.');
+	if (anchorIdx > -1) {
+		return window.location.hash.substring(1, anchorIdx);
+	}
+	return window.location.hash.substring(1);
+}
+
+function getLocationAnchor() {
+	let anchorIdx = window.location.hash.indexOf('.');
+	if (anchorIdx > -1) {
+		return window.location.hash.substring(anchorIdx + 1);
+	}
+}
+
+function refreshLocation() {
 
 	// Read the curent window hash
-	currHash = window.location.hash.substr(1);
+	let currHash = getLocationHash();
+	let currAnchor = getLocationAnchor();
 
 	// If the hash is not valid, we set index as the default one
 	if (validHashes.indexOf(currHash) < 0) {
@@ -70,21 +73,13 @@ function updateLocation() {
 
 	// Update the current location accordingly
 	mainContainer.setAttribute("data-location", currHash);
-	sectionContainer.innerHTML = "";
+	sectionContainer.innerHTML = '';
 
 	// Index
 	if (currHash == INDEX_HASH) {
 
-		// Create the covers from the projects
-		var coversDivs = [];
-		projects.order.forEach(function(projectName) {
-			coversDivs.push(
-				createCoverDiv(projects.list[projectName])
-			);
-		});
-
 		// Create the index section from the covers and add it to the section container
-		var indexSection = createIndexSection(coversDivs, rowsNbCols);
+		var indexSection = createIndexSection(projects.covers);
 		sectionContainer.appendChild(indexSection);
 
 		// Synchronize the loader with the imgs of the section
@@ -104,22 +99,33 @@ function updateLocation() {
 	// Details
 	else {
 		// Create the details section
+
+		
+		var projectsHashes = projects.covers.map((cover) => {
+			return cover.hash;
+		});
+		var currProjectIndex = projectsHashes.indexOf(currHash);
+
+		var nbProjects = projectsHashes.length;
+		var prevProjectHash = projectsHashes[((currProjectIndex - 1) % nbProjects + nbProjects) % nbProjects];
+		var nextProjectHash = projectsHashes[((currProjectIndex + 1) % nbProjects + nbProjects) % nbProjects];
+
 		var detailsSection = createDetailsSection(
-			projects.list[currHash],
-			projects.list[projects.order[(((projects.order.indexOf(currHash) - 1) % nbProjects) + nbProjects) % nbProjects]],
-			projects.list[projects.order[(((projects.order.indexOf(currHash) + 1) % nbProjects) + nbProjects) % nbProjects]]
+			{ ...projects.contents[currHash], hash: currHash },
+			{ ...projects.contents[prevProjectHash], hash: prevProjectHash },
+			{ ...projects.contents[nextProjectHash], hash: nextProjectHash }
 		);
 
 		// Add it to the section container
 		sectionContainer.appendChild(detailsSection);
 
 		// Synchronize the loader with the imgs of the section
-		synchronizeLoaderWithImgs(sectionContainer);
+		synchronizeLoaderWithImgs(sectionContainer, currAnchor);
 	}
 }
 
-function updateCurrSectionPaddingTop() {
-	document.getElementById(currHash).style.paddingTop = headerContainer.offsetHeight + "px";
+function refreshPaddingTop() {
+	sectionContainer.style.paddingTop = headerContainer.offsetHeight + "px";
 }
 
 // CSS animations
@@ -149,16 +155,15 @@ if (hasTouch()) {
     } catch (ex) {}
 }
 
-function synchronizeLoaderWithImgs(elem, callback) {
-	var imgs = elem.querySelectorAll("img");
-
+function synchronizeLoaderWithImgs(dom, anchor) {
+	var imgs = dom.querySelectorAll("img");
+	
 	// Show the loader
 	displayElem(loaderContainer);
 	showElem(loaderContainer);
 
-
-	nbImgsLoaded = 0;
-	nbImgsTotal = 0;
+	let nbImgsLoaded = 0;
+	let nbImgsTotal = 0;
 
 	imgs.forEach(function(img) {
 		hideElem(img);
@@ -176,11 +181,21 @@ function synchronizeLoaderWithImgs(elem, callback) {
 				setTimeout(function() {
 					
 					// Add a padding to the current section of the header height
-					updateCurrSectionPaddingTop();
+					refreshPaddingTop();
+					
+					let anchorElem;
+					if (anchor) {
+						anchorElem = document.getElementById(anchor);
+						if (anchorElem == null) {
+							console.error(`No anchor for '${anchor}'`);
+						}
+					}
+
+					let scrollTop = (anchorElem) ? anchorElem.offsetTop - headerContainer.offsetHeight : 0;
 
 					// Get on top !
-					document.body.scrollTop = 0; // For Safari
-					document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+					document.body.scrollTop = scrollTop; // For Safari
+					document.documentElement.scrollTop = scrollTop; // For Chrome, Firefox, IE and Opera
 
 					hideElem(loaderContainer);
 					setTimeout(function() {
@@ -221,70 +236,86 @@ function displayElem(el) {
 
 // DOM Creation
 
-function createIndexSection(content, rowsNbCols) {
+function createIndexSection(covers) {
 	var indexSection = document.createElement("section");
-	var gridDiv = document.createElement("div");
-	
-	var rowIdx = 0;
-	var colIdx = 0;
+	var grid = document.createElement("div");
 
-	while (colIdx < content.length) {
-		const nbCols = rowsNbCols[rowIdx];
+	var coverIdx = 0;
+	while (coverIdx < covers.length) {
+		let row = document.createElement("div");
+		row.classList.add("row");
 
-		let rowDiv = document.createElement("div");
-		rowDiv.classList.add("row");
+		let colIdx = 0
+		while (colIdx < 4 && coverIdx < covers.length) {
+			let cover = covers[coverIdx];
 
-		for (let j = 0; j < nbCols && colIdx < content.length; j++) {
-			let colDiv = document.createElement("div");
-			colDiv.classList.add("col");
+			let cols = createCoverCols(cover);
 
-			colDiv.appendChild(content[colIdx]);
-			rowDiv.appendChild(colDiv);
-			
-			colIdx++;
+			row.append(...cols);
+
+			colIdx += cols.length;
+			coverIdx++;
 		}
 
-		gridDiv.appendChild(rowDiv);
-		
-		rowIdx++;
+		grid.appendChild(row);
 	}
 	
 	indexSection.id = INDEX_HASH;
-	indexSection.appendChild(gridDiv);
+	indexSection.appendChild(grid);
 
 	return indexSection;
 }
 
-function createCoverDiv(project) {
-	var coverDiv = document.createElement("div");
-	var titleSpan = document.createElement("span");
-	var coverImg = document.createElement("img");
-	var linkA = document.createElement("a");
+function createCoverCols(cover) {
+	var cols = [];
+
+	var col = document.createElement("div");
+	var div = document.createElement("div");
+	var link = document.createElement("a");
+	var title = document.createElement("span");
+	var img = document.createElement("img");
 	
-	// Title
+	col.classList.add("col");
+	div.classList.add("cover");
 
-	titleSpan.textContent = project.title;
+	link.classList.add("cover-link");
+	link.href = "#" + cover.hash + ((cover.anchor) ? "." + cover.anchor : "");
 
-	coverDiv.appendChild(titleSpan);
+	title.textContent = cover.hash.replace(/[^a-z0-9]/gi, " ").toUpperCase();
 
-	// Image
+	img.src = "src/img/" + cover.hash + "/" + cover.img;
+	img.classList.add("cover-img");
 
-	coverImg.src = "src/img/" + project.hash + "/0.jpg";
-	coverImg.classList.add("cover-img");
+	div.appendChild(title);
+	div.appendChild(link);
+	link.appendChild(img);
+	col.appendChild(div);
 
-	// Link
+	cols.push(col);
 
-	linkA.classList.add("cover-link");
-	linkA.href = "#" + project.hash
-	linkA.appendChild(coverImg);
+	if (cover.large_img) {
+		var col2 = col.cloneNode(false);
+		var div2 = div.cloneNode(false);
+		var link2 = link.cloneNode(false);
+		var title2 = title.cloneNode(true);
+		var img2 = img.cloneNode(false);
 
-	coverDiv.appendChild(linkA);
+		col.setAttribute("data-type", "bis");
+		col2.setAttribute("data-type", "double");
+		col2.setAttribute("data-order", cover.large_img_order);
 
-	// Container
+		img2.src = "src/img/" + cover.hash + "/" + cover.large_img;
+		img2.classList.add("cover-img");
 
-	coverDiv.classList.add("cover");
+		div2.appendChild(title2);
+		div2.appendChild(link2);
+		link2.appendChild(img2);
+		col2.appendChild(div2);
 
-	return coverDiv;
+		cols.push(col2);
+	}
+
+	return cols;
 }
 
 function createDetailsSection(project, prevProject, nextProject) {
@@ -363,6 +394,16 @@ function parseHTMLFromText(text, hash) {
 
 	pargaraphs.forEach(function(paragraph) {
 		let p = document.createElement("p");
+
+		// Anchors
+
+		paragraph = paragraph.replace(/\<\#(.*?)\>$/g, function(match, capture) {
+			let div = document.createElement("div");
+
+			div.id = capture;
+			
+			return div.outerHTML;
+		});
 
 		// Link
 
