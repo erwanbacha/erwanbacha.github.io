@@ -71,7 +71,7 @@ const projects = {
 			img: "cover1bis.jpg"
 		},
 		{
-			hash : "Personnal_Work",
+			hash : "Personal_Work",
 			img: "cover1.jpg"
 		},
 		/*{
