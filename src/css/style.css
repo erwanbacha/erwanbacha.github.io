@@ -413,6 +413,8 @@ a {
 .details h1 {
 	padding-left: 3px;
 	padding-right: 3px;
+
+	font-style: italic;
 }
 
 .details h1 + p {
@@ -454,17 +456,17 @@ a {
 
 .details a:only-child img,
 .details video:only-child {
-	max-width: 100%;
+	width: 100%;
 }
 
 .details a:first-child:nth-last-child(2) img,
 .details a:first-child:nth-last-child(2) ~ a img {
-	max-width: 50%;
+	width: 50%;
 }
 
 .details a:first-child:nth-last-child(3) img,
 .details a:first-child:nth-last-child(3) ~ a img {
-	max-width: 33.3333%;
+	width: 33.3333%;
 }
 
 .details nav > a {
@@ -482,7 +484,7 @@ a {
 @media screen and (max-width: 800px) {
 	.details img,
 	.details video {
-		max-width: 100% !important;
+		width: 100% !important;
 		padding-left: 0 !important;
 		padding-right: 0 !important;
 	}
