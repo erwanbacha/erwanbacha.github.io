@@ -202,7 +202,11 @@ const data = {
 			Hermes : {
 				title : "HERMES",
 				details : 
-					`[1.jpg]
+					`As part of a workshop between Hermès and Penninghen, we designed 5 windows displays on the theme of dreams.
+					We worked in pairs with interior design students.
+					The idea was to tell the story of the odyssey of a character who metamorphoses into horse to join the constellations.
+					
+					[1.jpg]
 
 					[2.jpg]
 
@@ -213,7 +217,12 @@ const data = {
 			Ibis : {
 				title : "IBIS",
 				details : 
-					`[1.jpg][2.jpg][3.jpg]
+					`New brand identity for Ibis Budget hotels, a french and international hotel company, holded by Accor Hotels group.
+					The client experience is based on urban sports and everyday adventure.
+					The idea was to refresh the brand's spirit, conveying a young and dynamic feeling.
+					To do so, in collaboration with Anna Parraguette, we worked with a global vision, from photoshoot art direction to graphic identity, we developed a social media strategy, designed all printed materials, brand guidelines and even pictograms.
+					
+					[1.jpg][2.jpg][3.jpg]
 
 					[4.jpg]
 
@@ -252,7 +261,13 @@ const data = {
 			Mercure : {
 				title : "MERCURE",
 				details : 
-					`[1.jpg]
+					`New logotype and brand identity for Mercure hotels, a more than 1000 hotels international brand, part of Accor group.
+					Mercure's spirit is around the love of culture and the desire to discover the world with a touch of elegance.
+					The new logotype, designed with pure and simple lines, reflect a sense of modernity. The "M" monogram has been refreshed and separeted from the letters, it works as a discreet signature for the brand.
+					Inspired by Cocteau drawings, several symbols were created to enhance the brand graphic identity.
+					I worked as well on the photoshoot art direction (pictures coming soon).
+					
+					[1.jpg]
 					
 					[2.jpg]
 					
@@ -290,13 +305,18 @@ const data = {
 			Mum : {
 				title : "MUM",
 				details : 
-					`[1.jpg]
+					`Mom, Mum, Mama, Mami, Mae, Moma, The Mother is the one who gives birth, who carries life in her womb.
+					Editorial published by Uniform Magazine for the Reborn Issue.
+
+					*Team*: 3D art by Miguel Soudjay, Ildjima as model, stylism by Kevin Scott Pham, MUA by Chloé Paccard.
+
+					[1.jpg]
 					
 					[2.jpg]
 					
 					[3.jpg]
 
-					[4.jpg][5.jpg]
+					[4.jpg,bot][5.jpg]
 					
 					[6.jpg]
 
@@ -348,7 +368,14 @@ const data = {
 			Rodeo : {
 				title : "RODEO",
 				details : 
-					`[1.jpg]
+					`Believing we are all connected in one way or another, for good or for bad, Rodeo depicts images, which combine motorcycles, the earth, and keyboard touches into one cohesive image.
+					The term “Digital Babylon” was used as inspiration for this project as it describes the accelerated culture of today filled with unlimited access, profound alienation, deep complexities, and crisis of authority.
+					Whether we chose to see it as an advantage or a tragedy, Rodeo invokes the notion that we are all one.
+					Editorial published by Coeval Magazine, Kaltblut and Duel Magazine.
+					
+					*Team*: Stylism by Laura Ehui, MUA by Aurore Lebacle, video by Inès Ferhat, Xing Xing Mao and Konig Liouma as models, words by Chloe Cheng.
+					
+					[1.jpg]
 					
 					[2.jpg,mid][3.jpg]
 					
@@ -358,7 +385,7 @@ const data = {
 
 					[7.jpg]
 
-					[8.jpg][9.jpg][10.jpg]`
+					[8.jpg,top][9.jpg][10.jpg,top]`
 			},
 			Skies : {
 				title : "SKIES",

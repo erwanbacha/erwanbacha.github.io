@@ -243,7 +243,11 @@ function createCoverCols(cover) {
 	link.classList.add("cover-link");
 	link.href = "#" + cover.hash + ((cover.anchor) ? "." + cover.anchor : "");
 
-	title.textContent = cover.hash.replace(/[^a-z0-9]/gi, " ");
+	var titleText = cover.hash.replace(/[^a-z0-9]/gi, " ");
+	if (titleText.length > 12) {
+		titleText = titleText.replace(' ', "<br/>");
+	}
+	title.innerHTML = titleText;
 
 	img.src = "media/img/" + cover.hash + "/" + cover.img;
 	img.classList.add("cover-img");
@@ -351,6 +355,12 @@ function parseHTMLFromText(text, hash) {
 	var htmlList = [];
 	
 	var pargaraphs = text.split("\t").join("").split("\n\n");
+
+	function setContentAttribute(element, value) {
+		if (!element.hasAttribute('data-content')) {
+			element.setAttribute('data-content', value);
+		}
+	}
 	
 	// Paragraphs
 
@@ -363,6 +373,8 @@ function parseHTMLFromText(text, hash) {
 			let div = document.createElement("div");
 
 			div.id = capture;
+
+			setContentAttribute(p, 'anchor');
 			
 			return div.outerHTML;
 		});
@@ -415,7 +427,9 @@ function parseHTMLFromText(text, hash) {
 				if (align) {
 					video.setAttribute('data-align', align);
 				}
-				
+
+				setContentAttribute(p, 'video');
+
 				return video.outerHTML;
 			}
 			else {
@@ -432,6 +446,8 @@ function parseHTMLFromText(text, hash) {
 				a.target = "_blank";
 				
 				a.appendChild(img);
+
+				setContentAttribute(p, 'img');
 
 				return a.outerHTML;
 			}
