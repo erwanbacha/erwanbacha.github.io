@@ -193,6 +193,25 @@ a {
 	margin: auto;
 }
 
+.header-row {
+	margin: auto;
+	width: 100%;
+	max-width: 1000px;
+
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}
+
+.header-col {
+	-ms-flex: 50%;
+	flex: 50%;
+	max-width: 50%;
+
+	display: inline-block;
+}
+
 #signature-container {
 	text-align: left;
 }
@@ -219,26 +238,23 @@ a {
 /* Small screens */
 
 @media screen and (max-width: 600px) {
+	.header-col {
+		-ms-flex: 100%;
+		flex: 100%;
+		max-width: 100%;
+	}
+
 	#signature-container,
 	#nav-container {
-		text-align: center !important;
-	}
-}
-
-/* Medium screens */
-
-@media screen and (max-width: 1200px) {
-	.no-md {
-		display: none !important;
+		text-align: center;
 	}
 }
 
 /* Large screens */
 
 @media screen and (min-width: 1201px) {
-	#main #header {
+	#header {
 		padding: 0;
-		max-width: 100%;
 	}
 }
 
@@ -246,6 +262,9 @@ a {
 /*		Index		*/
 /*------------------*/
 
+#main[data-location='Index'] .header-row {
+	max-width: 50% !important;
+}
 
 .cover {
 	position: relative;
@@ -339,6 +358,11 @@ a {
 /* Medium screens */
 
 @media screen and (max-width: 1200px) {
+
+	#main[data-location='Index'] .header-row {
+		max-width: 100% !important;
+	}
+
 	.col {
 		-ms-flex: 50%;
 		flex: 50%;
@@ -363,6 +387,7 @@ a {
 /* Small screens */
 
 @media screen and (max-width: 600px) {
+
 	.col {
 		-ms-flex: 100% !important;
 		flex: 100% !important;
@@ -372,6 +397,7 @@ a {
 	.col[data-type='bis'] {
 		display: block !important;
 	}
+
 	.col[data-type='double'] {
 		display: none !important;
 	}
@@ -380,7 +406,6 @@ a {
 /*------------------*/
 /*		Contact		*/
 /*------------------*/
-
 
 .contact {
 	text-align: center;
