@@ -73,23 +73,23 @@ const data = {
 				img: "cover3.jpg",
 				anchor: "3"
 			},
-			{
+			/*{
 				hash: "Terrain_magazine",
 				img: "cover1.jpg"
-			},
-			{
+			},*/
+			/*{
 				hash: "PDG",
 				img: "cover1.jpg"
-			},
-			{
+			},*/
+			/*{
 				hash: "Autodafe",
 				anchor: "lol",
 				img: "cover1.jpg"
-			},
-			{
+			},*/
+			/*{
 				hash: "Carcasses",
 				img: "cover1.jpg"
-			},
+			},*/
 			/*{
 				hash: "Lady_Snowblood",
 				img: "cover1.jpg"
