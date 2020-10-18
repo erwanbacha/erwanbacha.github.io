@@ -284,11 +284,11 @@ const data = {
 			Moelle : {
 				title : "MOELLE",
 				details : 
-					`A premium Magazine issue created in collaboration with Alicia Andre. In a nutshell, the magazine is about food and culinary ehaviours in six different religions and cults that can be found in Paris.
+					`A premium Magazine issue created in collaboration with Alicia Andre. In a nutshell, the magazine is about food and culinary behaviours in six different religions and cults that can be found in Paris.
 					The main design feature is a complexe page layout we designed including photographs we took of all the places and people we met that helped us during the project.
 					The objective was to promote different cultures and rituals throughout a rich and powerful design.
 					The magazine issue can be opened like a box, in	order to be logical with the magazine brand guideline, that is all based on a famous sentence of Rabelais: « break the bone in order to eat the marrow ».
-					We use the red as the main colour because ofits eye catching power and it remind blood, life and faith, quiteimportants values when we talk about religion.
+					We use the red as the main colour because of its eye catching power and it reminds blood, life and faith, quite important values when we talk about religion.
 					
 					[1.jpg]
 					

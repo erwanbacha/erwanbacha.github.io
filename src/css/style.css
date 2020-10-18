@@ -394,6 +394,7 @@ a {
 
 .details {
 	width: 100%;
+	max-width: 1000px;
 	
 	padding: 0 6px;
 
@@ -477,14 +478,6 @@ a {
 	padding-top: 30px;
 	text-align: center;
 	padding-bottom: 30px;
-}
-
-/* Large screens */
-
-@media screen and (min-width: 1201px) {
-	.details {
-		max-width: 50%;
-	}
 }
 
 /* Medium screens */
