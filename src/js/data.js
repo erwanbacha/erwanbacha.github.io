@@ -284,6 +284,8 @@ const data = {
 					The "M" monogram has been refreshed and separeted from the letters, it works as a discreet signature for the brand.
 					Inspired by Cocteau drawings, several symbols were created to enhance the brand graphic identity applied to printed materials.
 					I worked as well on the photoshoot art direction for the digital snack content.
+
+					*Team*: Photography by Rachelle Simoneau.
 					
 					[1.gif]
 					
