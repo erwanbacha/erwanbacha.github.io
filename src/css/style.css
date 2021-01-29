@@ -375,11 +375,11 @@ a {
 		max-width: 100% !important;
 	}
 
-	.col[data-order='left'] {
+	.col[data-position='left'] {
 		order: -1;
 	}
 	
-	.col[data-order='right'] {
+	.col[data-position='right'] {
 		order: 1;
 	}
 }

@@ -2,18 +2,18 @@ const data = {
 	projects: {
 		covers: [
 			{
-				hash: "Ibis",
-				img: "cover1.jpg"
-			},
-			{
 				hash: "Mercure",
-				large_img: "cover1.jpg",
-				large_img_order: "left",
-				img: "cover1bis.jpg"
+				img: "cover1.jpg"
 			},
 			{
-				hash: "Moelle",
+				hash: "Ibis",
+				large_img: "cover1large.jpg",
+				large_img_position: "left",
 				img: "cover1.jpg"
+			},
+			{
+				hash: "LVMH",
+				img: "cover1.gif"
 			},
 			{
 				hash: "Mum",
@@ -24,21 +24,20 @@ const data = {
 				img: "1.gif"
 			},
 			{
+				hash: "Moelle",
+				large_img: "cover1large.jpg",
+				large_img_position: "right",
+				img: "cover1.jpg"
+			},
+			{
 				hash: "Stigmates",
-				large_img: "cover1.jpg",
-				large_img_order: "right",
-				img: "cover1bis.jpg",
+				large_img: "cover1large.jpg",
+				large_img_position: "right",
+				img: "cover1.jpg",
 			},
 			{
-				hash: "Eve",
-				large_img: "cover1.jpg",
-				large_img_order: "left",
-				img: "cover1bis.jpg",
-			},
-			{
-				hash: "Ibis",
-				img: "cover2.jpg",
-				anchor: "2"
+				hash: "Moon_Eater",
+				img: "cover1.jpg",
 			},
 			{
 				hash: "Rodeo",
@@ -50,9 +49,9 @@ const data = {
 			},
 			{
 				hash: "Cadences",
-				large_img: "cover1.jpg",
-				large_img_order: "right",
-				img: "cover1bis.jpg"
+				large_img: "cover1large.jpg",
+				large_img_position: "right",
+				img: "cover1.jpg"
 			},
 			{
 				hash: "Personal_Work",
@@ -63,15 +62,15 @@ const data = {
 				img: "cover1.jpg"
 			},
 			{
-				hash: "Skies",
-				large_img: "cover1.jpg",
-				large_img_order: "right",
-				img: "cover1bis.jpg"
-			},
-			{
 				hash: "Ibis",
 				img: "cover3.jpg",
 				anchor: "3"
+			},
+			{
+				hash: "Skies",
+				large_img: "cover1large.jpg",
+				large_img_position: "right",
+				img: "cover1.jpg"
 			},
 			/*{
 				hash: "Terrain_magazine",
@@ -93,6 +92,12 @@ const data = {
 			/*{
 				hash: "Lady_Snowblood",
 				img: "cover1.jpg"
+			},*/
+			/*{
+				hash: "Eve",
+				large_img: "cover1.jpg",
+				large_img_position: "left",
+				img: "cover1large.jpg",
 			},*/
 		],
 		contents : {
@@ -258,28 +263,45 @@ const data = {
 
 					[5.jpg]`
 			},
+			LVMH : {
+				title : "LVMH",
+				details : 
+					`Series of illustrations for Cloudy Bay, an exceptional wine brand based in New Zealand, part of Moët Hennessy group (LVMH).
+					(more pictures soon)
+					
+					[1.jpg]
+					
+					[2.jpg]
+
+					[3.jpg]`
+			},
 			Mercure : {
 				title : "MERCURE",
 				details : 
 					`New logotype and brand identity for Mercure hotels, a more than 1000 hotels international brand, part of Accor group.
 					Mercure's spirit is around the love of culture and the desire to discover the world with a touch of elegance.
-					The new logotype, designed with pure and simple lines, reflect a sense of modernity. The "M" monogram has been refreshed and separeted from the letters, it works as a discreet signature for the brand.
-					Inspired by Cocteau drawings, several symbols were created to enhance the brand graphic identity.
-					I worked as well on the photoshoot art direction (pictures coming soon).
+					The new logotype, designed with pure and simple lines, reflect a sense of modernity.
+					The "M" monogram has been refreshed and separeted from the letters, it works as a discreet signature for the brand.
+					Inspired by Cocteau drawings, several symbols were created to enhance the brand graphic identity applied to printed materials.
+					I worked as well on the photoshoot art direction for the digital snack content.
 					
-					[1.jpg]
+					[1.gif]
 					
 					[2.jpg]
 					
 					[3.jpg]
 
-					[4.jpg]
+					[4.jpg][5.jpg][6.jpg]
 					
-					[5.jpg]
-
-					[6.jpg]
+					[7.jpg][8.jpg]
 					
-					[7.jpg]`
+					[9.jpg][10.jpg][11.jpg]
+					
+					[12.jpg]
+					
+					[13.jpg]
+					
+					[14.jpg]`
 			},
 			Moelle : {
 				title : "MOELLE",
@@ -301,6 +323,27 @@ const data = {
 					[5.jpg]
 
 					[6.jpg]`
+			},
+			Moon_Eater : {
+				title : "MOON EATER",
+				details : 
+					`Editorial fashion shoot in collaboration with Miguel Soudjay and Hanna Loumeau.
+
+					*Team*: Hair by Melissa Nevorique, MUA by Yass ULPV, Stylism by Bodi Samba, Nail Art by Adrienne Manucurist.
+					
+					[1.jpg]
+					
+					[2.jpg]
+					
+					[3.jpg][4.jpg]
+
+					[5.jpg]
+					
+					[6.jpg]
+
+					[7.jpg][8.jpg]
+					
+					[9.jpg]`
 			},
 			Mum : {
 				title : "MUM",

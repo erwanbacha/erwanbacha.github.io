@@ -78,6 +78,9 @@ function refreshLocation() {
 	else {
 		const orderedProjectHashes = data.projects.covers.map((cover) => {
 			return cover.hash;
+		}).filter((hash, pos, arr) => {
+			// Removes duplicates
+			return arr.indexOf(hash) === pos;
 		});
 		var currProjectIndex = orderedProjectHashes.indexOf(currHash);
 
@@ -268,7 +271,7 @@ function createCoverCols(cover) {
 
 		col.setAttribute("data-type", "bis");
 		col2.setAttribute("data-type", "double");
-		col2.setAttribute("data-order", cover.large_img_order);
+		col2.setAttribute("data-position", cover.large_img_position);
 
 		img2.src = "media/img/" + cover.hash + "/" + cover.large_img;
 		img2.classList.add("cover-img");
