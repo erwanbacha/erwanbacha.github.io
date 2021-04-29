@@ -1,3 +1,16 @@
+
+// <test>
+const onload = async function() {
+    const data = await fetch("src/js/data.json").then((res) => {
+        if (res.ok) {
+            return res.json()
+        }
+    });
+    console.log(data);
+}
+onload();
+// </test>
+
 const data = {
 	projects: {
 		covers: [
@@ -101,7 +114,7 @@ const data = {
 			},*/
 		],
 		contents : {
-			Autodafe : {
+			/*Autodafe : {
 				title : "AUTODAFE",
 				details : 
 					`The project is a short 3-minutes video clip.
@@ -129,7 +142,7 @@ const data = {
 					[6.jpg][7.jpg]
 					
 					[8.jpg][9.jpg]`
-			},
+			},*/
 			Cadences : {
 				title : "CADENCES",
 				details : 
@@ -156,7 +169,7 @@ const data = {
 					
 					[cover1.jpg]`
 			},
-			Carcasses : {
+			/*Carcasses : {
 				title : "CARCASSES",
 				details : 
 					`Editorial project based on the graphic forms found in car wrecks.
@@ -185,8 +198,8 @@ const data = {
 					[10.mp4]
 					
 					[11.gif]`			
-			},
-			Eve : {
+			},*/
+			/*Eve : {
 				title : "EVE",
 				details : 
 					`Creation of 80 page book, consisting in 90 photographs of 12 naked women, in order to highlight body diversity and the beauty we find in it.
@@ -203,7 +216,7 @@ const data = {
 					[7.jpg][8.jpg]
 					
 					[9.jpg]`
-			},
+			},*/
 			Hermes : {
 				title : "HERMES",
 				details : 
@@ -249,7 +262,7 @@ const data = {
 					
 					[15.jpg]`
 			},
-			Lady_Snowblood : {
+			/*Lady_Snowblood : {
 				title : "LADY SNOWBLOOD",
 				details : 
 					`Series of photographs consisting in 4 scenes portraying a killing geisha.
@@ -262,7 +275,7 @@ const data = {
 					[4.jpg]
 
 					[5.jpg]`
-			},
+			},*/
 			LVMH : {
 				title : "LVMH",
 				details : 
@@ -367,7 +380,7 @@ const data = {
 
 					[7.jpg]`
 			},
-			PDG : {
+			/*PDG : {
 				title : "PRETTY DAMN GOOD",
 				details : 
 					`Rebranding of a parisian burger restaurant.
@@ -390,7 +403,7 @@ const data = {
 					[7.jpg]
 
 					[8.jpg]`
-			},
+			},*/
 			Personal_Work : {
 				title : "PERSONAL WORK",
 				details : 
@@ -531,7 +544,7 @@ const data = {
 					
 					[7.jpg,bot][8.gif]`
 			},
-			Terrain_magazine : {
+			/*Terrain_magazine : {
 				title : "TERRAIN MAGAZINE",
 				details : 
 					`Illustration series based on anthropological articles (Terrain Magazine) on the theme of ghosts and spiritism around different cultures.
@@ -548,7 +561,7 @@ const data = {
 					[5.jpg]
 					
 					[6.jpg]`
-			}
+			}*/
 		}
 	},
 	contact: {
